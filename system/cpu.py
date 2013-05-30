@@ -23,8 +23,8 @@ def cpu_stat():
 if __name__ == '__main__':
     c =cpu_stat()
     print c
-    print "the core number is %s " % c[2]['cache size']
-    #print c
+    print "the core number is  %s " % c[0]
+    print "the core name   is %s " % c[2]['model name']
 
 
 
