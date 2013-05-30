@@ -17,12 +17,13 @@ def cpu_stat():
         name = line.split(':')[0].rstrip()
         var = line.split(':')[1]
         cpuinfo[name] = var
-    print cpuinfo
-    print cpu
-    return i,cpu
+    #print cpuinfo
+    #print cpu
+    return i,cpu,cpuinfo
 if __name__ == '__main__':
     c =cpu_stat()
-    print "the core number is %s " % c[0]
+    print c
+    print "the core number is %s " % c[2]['cache size']
     #print c
 
 
