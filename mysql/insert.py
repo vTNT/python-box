@@ -3,7 +3,7 @@
 import MySQLdb
 
 try:
-    conn = MySQLdb.connect(host='localhost',user='root',passwd='ename110',port=3306)
+    conn = MySQLdb.connect(host='localhost',user='root',passwd='xxx',port=3306)
     cur = conn.cursor()
 
     cur.execute('create database if not exists python')

@@ -7,3 +7,7 @@ system
 test
 ----------
 主要是简明Python教程的内容
+
+mysql
+----------
+主要是连接mysql，并对mysql进行相关操作
