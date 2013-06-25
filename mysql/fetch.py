@@ -1,10 +1,22 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# Filename: fetch.py
+# Last modified: 2013-06-25 10:12
+# Author: vTNT
+# Email : vbb625@gmail.com
+# Description: 
 
 import MySQLdb
 
 try:
-    conn=MySQLdb.connect(host='localhost',user='root',passwd='xxx',port=3306)
+    MYSQL_CONFIG = {
+        'host': 'localhost',
+        'user': 'root',
+        'passwd': 'xxx',
+        'port': 3306,
+    }
+
+    conn=MySQLdb.connect(host = MYSQL_CONFIG['host'],user = MYSQL_CONFIG['user'] ,passwd = MYSQL_CONFIG['passwd'],port = MYSQL_CONFIG['port'])
     cur = conn.cursor()
 
     conn.select_db('python')
