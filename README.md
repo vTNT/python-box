@@ -19,3 +19,7 @@ app
 collect
 ----------
 主要是系统信息收集系统
+
+zabbix
+----------
+主要是利用zabbix api对zabbix 进行操作
