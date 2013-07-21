@@ -1,3 +1,4 @@
 system/*.pyc
 mysql/*.pyc
 app/*.pyc
+web/django/mysite/mysite/*.pyc

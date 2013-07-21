@@ -23,3 +23,7 @@ collect
 zabbix
 ----------
 主要是利用zabbix api对zabbix 进行操作
+
+web
+----------
+主要是学习相关web框架的记录
