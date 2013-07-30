@@ -1,10 +1,21 @@
 {% include "header.html" %}
 <body>
-    <h1>{{ config.email }}</h1>
-    <ul>
+<h1>{{ config.email }}</h1>
+<ul>
     {% for item in todos %}
-        <li>{{ item.title }}</li>
+    <li>{{ item.title }}</li>
     {% endfor %}
-    </ul>
+</ul>
+
+<div>
+    <form method="post" action="/todo/new">
+        <p>
+            <input type="text" name="title" />
+        </p>
+        <p>
+            <input type="submit" value="tianjia" />
+        </p>
+    </form>
+</div>
 </body>
 </html>

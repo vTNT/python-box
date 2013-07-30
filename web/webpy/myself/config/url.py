@@ -8,5 +8,6 @@
 pre_fix = 'controllers.'
 
 urls = (
-    '/', pre_fix + 'todo.Index',   
+    '/',                pre_fix + 'todo.Index',   
+    '/todo/new',     pre_fix + 'todo.New', 
     )

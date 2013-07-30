@@ -19,3 +19,10 @@ class Index:
     def GET(self):
         todos = db.select(tb, order='finished asc, id asc')
         return render.index(config=config,todos=todos)
+
+class New:
+
+    def POST(self):
+        i = web.input()
+        db.insert(tb, title=i.title, post_date=datetime.now())
+        raise web.seeother('/')
