@@ -18,4 +18,4 @@ class Index:
 
     def GET(self):
         todos = db.select(tb, order='finished asc, id asc')
-        return render.index(email=config.email,todos=todos)
+        return render.index(config=config,todos=todos)
