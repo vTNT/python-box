@@ -3,7 +3,12 @@
 <h1>{{ config.email }}</h1>
 <ul>
     {% for item in todos %}
-    <li>{{ item.title }}</li>
+    <li>
+        {{ item.title }}&nbsp;
+        <a href="#">OK</a>
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+    </li>
     {% endfor %}
 </ul>
 

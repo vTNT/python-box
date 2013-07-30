@@ -26,3 +26,11 @@ class New:
         i = web.input()
         db.insert(tb, title=i.title, post_date=datetime.now())
         raise web.seeother('/')
+
+class delete:
+
+    def 
+
+class Edit:
+
+    def
