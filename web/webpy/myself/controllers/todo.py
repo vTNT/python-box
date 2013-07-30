@@ -11,11 +11,11 @@ from datetime import datetime
 
 render = settings.render
 db = settings.db
+config = settings.config
 tb = 'todo'
 
 class Index:
 
     def GET(self):
         todos = db.select(tb, order='finished asc, id asc')
-        kk = "aaa"
-        return render.index(title=kk)
+        return render.index(email=config.email,todos=todos)

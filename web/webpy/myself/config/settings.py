@@ -24,5 +24,3 @@ config = web.storage(
     static = '/static',
     )
 
-web.template.Template.globals['config'] = config
-web.template.Template.globals['render'] = render
