@@ -27,10 +27,23 @@ class New:
         db.insert(tb, title=i.title, post_date=datetime.now())
         raise web.seeother('/')
 
-class delete:
+#class delete:
 
-    def 
 
 class Edit:
 
-    def
+    def GET(self, id):
+        n = db.select(tb, where='id=$id', vars=locals())
+        return render.edit(title=n,config=config)
+
+    def POST(self, id):
+        i = web.input()
+        db.update(tb, title=i.title, where='id=$id', vars=locals())
+        raise web.seeother('/')
+
+class Delete:
+
+    def GET(self, id):
+        db.delete(tb, where='id=$id', vars=locals())
+        raise web.seeother('/')
+        
