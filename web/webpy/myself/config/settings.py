@@ -18,7 +18,7 @@ render = render_jinja(
 web.config.debug = True
 
 config = web.storage(
-    email = 'kk@163.com',
+    email = 'this is the test',
     site_name = 'this is the test',
     site_desc = '',
     static = '/static',

@@ -16,9 +16,19 @@ tb = 'todo'
 
 class Index:
 
-    def GET(self):
-        todos = db.select(tb, order='finished asc, id asc')
-        return render.index(config=config,todos=todos)
+    def GET(self,page=1):
+        page = int(page)
+        perpage = 10
+        offset = (page-1) * perpage
+        todos = db.select(tb, order='finished asc, id asc',offset=offset,limit=perpage)
+        postcount = db.query('select count(*) as count from todo')[0]
+        pages = postcount.count / perpage
+        if postcount.count % perpage > 0:
+            pages += 1
+        if page > pages:
+            raise web.seeother('/')
+        else:
+            return render.index(config=config,todos=todos,pages=pages)
 
 class New:
 
@@ -38,7 +48,8 @@ class Edit:
 
     def POST(self, id):
         i = web.input()
-        db.update(tb, title=i.title, where='id=$id', vars=locals())
+        title = i['title']
+        db.update(tb, title=title, where='id=$id', vars=locals())
         raise web.seeother('/')
 
 class Delete:
