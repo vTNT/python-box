@@ -57,4 +57,12 @@ class Delete:
     def GET(self, id):
         db.delete(tb, where='id=$id', vars=locals())
         raise web.seeother('/')
-        
+
+class Search:
+
+    def POST(self):
+        i = web.input()
+        timeafter = i['timeafter']
+        timebefore = i['timebefore']
+#        todos = db.select(tb, where='post_date between $timebefore and $timeafter')
+        return render.search(timeafter=timeafter,timebefore=timebefore,config=config)

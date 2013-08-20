@@ -13,4 +13,5 @@ urls = (
     '/todo/new',              pre_fix + 'todo.New', 
     '/todo/(\d+)/edit',      pre_fix + 'todo.Edit',  
     '/todo/(\d+)/delete',   pre_fix + 'todo.Delete',
+    '/todo/search',          pre_fix + 'todo.Search',  
     )
