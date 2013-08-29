@@ -66,5 +66,6 @@ class Search:
         timebefore = i['timebefore']
         sql = 'select * from todo where post_date between "%s" and "%s" ' % (timebefore, timeafter)
         todos = db.query(sql)
-        return render.search(todos=todos,config=config)
+        num = len(todos)
+        return render.search(todos=todos,config=config,num=num)
        # return render.search(timeafter=timeafter,timebefore=timebefore,config=config)
