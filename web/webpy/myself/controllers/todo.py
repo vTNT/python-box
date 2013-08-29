@@ -49,7 +49,7 @@ class Edit:
     def POST(self, id):
         i = web.input()
         title = i['title']
-        db.update(tb, title=title, where='id=$id', vars=locals())
+        db.update(tb, title=title,post_date=datetime.now(), where='id=$id', vars=locals())
         raise web.seeother('/')
 
 class Delete:
@@ -64,5 +64,7 @@ class Search:
         i = web.input()
         timeafter = i['timeafter']
         timebefore = i['timebefore']
-#        todos = db.select(tb, where='post_date between $timebefore and $timeafter')
-        return render.search(timeafter=timeafter,timebefore=timebefore,config=config)
+        sql = 'select * from todo where post_date between "%s" and "%s" ' % (timebefore, timeafter)
+        todos = db.query(sql)
+        return render.search(todos=todos,config=config)
+       # return render.search(timeafter=timeafter,timebefore=timebefore,config=config)
