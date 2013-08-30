@@ -14,80 +14,96 @@
 
     <div>
         <form method="post" action="/todo/search">
-       <p>from</p> 
-        <div class="input-append date form_datetime">
-            <input size="16" type="text" name="timebefore" readonly>
-            <span class="add-on"> <i class="icon-remove"></i>
-            </span>
-            <span class="add-on"> <i class="icon-calendar"></i>
-            </span>
-        </div>
-        <p>to</p>
-        <div class="input-append date form_datetime">
-            <input size="16" type="text" name="timeafter" readonly>
-            <span class="add-on">
-                <i class="icon-remove"></i>
-            </span>
-            <span class="add-on">
-                <i class="icon-calendar"></i>
-            </span>
-        </div>
-        <button type="submit" class="btn">Submit</button>
+            <p>from</p>
+            <div class="input-append date form_datetime">
+                <input size="16" type="text" name="timebefore" readonly>
+                <span class="add-on"> <i class="icon-remove"></i>
+                </span>
+                <span class="add-on"> <i class="icon-calendar"></i>
+                </span>
+            </div>
+            <p>to</p>
+            <div class="input-append date form_datetime">
+                <input size="16" type="text" name="timeafter" readonly>
+                <span class="add-on">
+                    <i class="icon-remove"></i>
+                </span>
+                <span class="add-on">
+                    <i class="icon-calendar"></i>
+                </span>
+            </div>
+            <button type="submit" class="btn">Submit</button>
         </form>
     </div>
 
     <h1>{{ config.email }}</h1>
-    <div class="row-fluid">
-        <div class="span4">
-            <p>test</p>
-        </div>
-        <div class="span4">
-            <p>test</p>
-        </div>
-        <div class="span4">
-            <p>test</p>
-        </div>
-    </div>
 
-    <ul>
+    <table class="table table-hover">
+        <colgroup>
+        <col width="200">
+        <col width="200">
+        <col width="200">
+        <col width="300">
+        <col width=""></colgroup>
+    <tbody>
+        <tr class="thead">
+            <th>id</th>
+            <th>title</th>
+            <th>finished</th>
+            <th>post_date</th>
+            <th>action</th>
+        </tr>
         {% for item in todos %}
-        <li>
-            {{ item.title }}&nbsp;
-            <a href="#">ok</a>
-            <a href="/todo/{{ item.id }}/edit">edit</a>
-            <a href="/todo/{{ item.id }}/delete" onclick="return confirm('are you sure ??')">delete</a>
-            {{ item.post_date }}
+        <tr>
+            <td>
+                <span>{{ item.id }}</span>
+            </td>
+            <td>
+                <span>{{ item.title }}</span>
+            </td>
+            <td>
+                <span>{{ item.finished }}</span>
+            </td>
+            <td>
+                <span>{{ item.post_date }}</span>
+            </td>
+            <td>
+                <a href="#">ok</a>
+                <a href="/todo/{{ item.id }}/edit">edit</a>
+                <a href="/todo/{{ item.id }}/delete" onclick="return confirm('are you sure ??')">delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    <ul>
+        <li class="previous">
+            <a href="#">&larr; Older</a>
+        </li>
+        {% for page in range(1,pages + 1) %}
+        <li class="disabled">
+            <a href="/page/{{ page }}">{{ page }}</a>
         </li>
         {% endfor %}
+        <li class="next">
+            <a href="#">Newer &rarr;</a>
+        </li>
     </ul>
+</div>
 
-    <div class="pagination">
-        <ul>
-            <li>
-                <a href="#">Prev</a>
-            </li>
-            {% for page in range(1,pages + 1) %}
-            <li class="disabled">
-                <a href="/page/{{ page }}">{{ page }}</a>
-            </li>
-            {% endfor %}
-            <li>
-                <a href="#">Next</a>
-            </li>
-        </ul>
-    </div>
+<div>
 
-    <div>
-
-        <form method="post" action="/todo/new">
-            <fieldset>
-                <p>
-                    <input type="text" name="title" />
-                </p>
-                <button type="submit" class="btn">Submit</button>
-            </fieldset>
-        </form>
-    </div>
+    <form method="post" action="/todo/new">
+        <fieldset>
+            <p>
+                <input type="text" name="title" />
+            </p>
+            <button type="submit" class="btn">Submit</button>
+        </fieldset>
+    </form>
+</div>
 
 </div>
 <!-- /container -->
