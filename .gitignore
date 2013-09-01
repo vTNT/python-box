@@ -5,3 +5,4 @@ web/django/mysite/mysite/*.pyc
 web/webpy/myself/config/*.pyc
 web/webpy/myself/*.pyc
 web/webpy/myself/controllers/*.pyc
+web/webpy/myself/sessions

@@ -8,10 +8,14 @@
 import web
 from config import settings
 from datetime import datetime
+import base
 
 render = settings.render
 db = settings.db
 config = settings.config
+admin = config.admin
+pwd = config.password
+
 tb = 'todo'
 
 class Index:
@@ -69,3 +73,20 @@ class Search:
         num = len(todos)
         return render.search(todos=todos,config=config,num=num)
        # return render.search(timeafter=timeafter,timebefore=timebefore,config=config)
+
+class Login:
+    def GET(self):
+        if base.logged():
+            raise web.seeother('/main')
+        else:
+            return render.login()
+
+    def POST(self):
+        username = web.input().username
+        password = web.input().password
+
+        if (password == pwd) and (username == admin):
+            web.ctx.session.logined = 1
+            raise web.seeother('/main')
+        else:
+            return "you are wrong!!"

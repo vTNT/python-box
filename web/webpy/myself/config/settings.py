@@ -22,5 +22,7 @@ config = web.storage(
     site_name = 'this is the test',
     site_desc = '',
     static = '/static',
+    admin = 'admin',
+    password = 'admin',
     )
 

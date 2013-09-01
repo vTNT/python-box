@@ -8,10 +8,11 @@
 pre_fix = 'controllers.'
 
 urls = (
-    '/',                         pre_fix + 'todo.Index',   
+    '/main',                         pre_fix + 'todo.Index',   
     '/page/(\d+)',            pre_fix + 'todo.Index',   
     '/todo/new',              pre_fix + 'todo.New', 
     '/todo/(\d+)/edit',      pre_fix + 'todo.Edit',  
     '/todo/(\d+)/delete',   pre_fix + 'todo.Delete',
-    '/todo/search',          pre_fix + 'todo.Search',  
+    '/todo/search',          pre_fix + 'todo.Search',
+    '/$',                   pre_fix + 'todo.Login',  
     )
