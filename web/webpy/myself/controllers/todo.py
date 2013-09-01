@@ -90,3 +90,9 @@ class Login:
             raise web.seeother('/main')
         else:
             return "you are wrong!!"
+
+class Logout:
+    def GET(self):
+        web.ctx.session.kill()
+        raise web.seeother('/')
+        

@@ -14,5 +14,6 @@ urls = (
     '/todo/(\d+)/edit',      pre_fix + 'todo.Edit',  
     '/todo/(\d+)/delete',   pre_fix + 'todo.Delete',
     '/todo/search',          pre_fix + 'todo.Search',
-    '/$',                   pre_fix + 'todo.Login',  
+    '/$',                   pre_fix + 'todo.Login',
+    '/logout',              pre_fix + 'todo.Logout',  
     )
