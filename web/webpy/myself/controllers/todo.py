@@ -21,25 +21,28 @@ tb = 'todo'
 class Index:
 
     def GET(self,page=1):
-        page = int(page)
-        perpage = 10
-        offset = (page-1) * perpage
-        todos = db.select(tb, order='finished asc, id asc',offset=offset,limit=perpage)
-        postcount = db.query('select count(*) as count from todo')[0]
-        pages = postcount.count / perpage
-        if postcount.count % perpage > 0:
-            pages += 1
-        if page > pages:
+        if not base.logged():
             raise web.seeother('/')
         else:
-            return render.index(config=config,todos=todos,pages=pages)
+            page = int(page)
+            perpage = 10
+            offset = (page-1) * perpage
+            todos = db.select(tb, order='finished asc, id asc',offset=offset,limit=perpage)
+            postcount = db.query('select count(*) as count from todo')[0]
+            pages = postcount.count / perpage
+            if postcount.count % perpage > 0:
+                pages += 1
+            if page > pages:
+                raise web.seeother('/main')
+            else:
+                return render.index(config=config,todos=todos,pages=pages)
 
 class New:
 
     def POST(self):
         i = web.input()
         db.insert(tb, title=i.title, post_date=datetime.now())
-        raise web.seeother('/')
+        raise web.seeother('/main')
 
 #class delete:
 
@@ -54,13 +57,13 @@ class Edit:
         i = web.input()
         title = i['title']
         db.update(tb, title=title,post_date=datetime.now(), where='id=$id', vars=locals())
-        raise web.seeother('/')
+        raise web.seeother('/main')
 
 class Delete:
 
     def GET(self, id):
         db.delete(tb, where='id=$id', vars=locals())
-        raise web.seeother('/')
+        raise web.seeother('/main')
 
 class Search:
 
@@ -95,4 +98,3 @@ class Logout:
     def GET(self):
         web.ctx.session.kill()
         raise web.seeother('/')
-        
