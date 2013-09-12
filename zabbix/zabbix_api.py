@@ -73,6 +73,74 @@ class zabbixtools:
             for host in response['result']:
                 print "\t","Host ID:",host['hostid'],"\t","Host Name:",host['name'].encode('GBK'),"\tstatus",host['status']
 
+    def hostgroup_get(self):
+        authID = self.user_login()
+        data = json.dumps(
+                {
+                    "jsonrpc": "2.0",
+                    "method": "hostgroup.get",
+                    "params": {
+                        "output": "extend",
+                        #"filter":{"host":""}
+                        },
+                    "auth": authID,
+                    "id": 1,
+                    })
+                # create request object
+        request = urllib2.Request(self.url,data)
+        for key in self.header:
+            request.add_header(key,self.header[key])
+        # get host list
+        try:
+            result = urllib2.urlopen(request)
+        except URLError as e:
+            if hasattr(e, 'reason'):
+                print 'We failed to reach a server.'
+                print 'Reason: ', e.reason
+            elif hasattr(e, 'code'):
+                print 'The server could not fulfill the request.'
+                print 'Error code: ', e.code
+        else:
+            response = json.loads(result.read())
+            result.close()
+            print "\033[1;32;40m%s\033[0m" % "Number Of Hostgroups: ","\033[1;31;40m%d\033[0m" % len(response['result'])
+            for hostgroup in response['result']:
+                print "\t","HostGroup_id:",hostgroup['groupid'],"\t","HostGroup_Name:",hostgroup['name'].encode('GBK')
+
+    def template_get(self):
+        authID = self.user_login()
+        data = json.dumps(
+                {
+                    "jsonrpc": "2.0",
+                    "method": "template.get",
+                    "params": {
+                        "output": "extend",
+                        #"filter":{"host":""}
+                        },
+                    "auth": authID,
+                    "id": 1,
+                    })
+                # create request object
+        request = urllib2.Request(self.url,data)
+        for key in self.header:
+            request.add_header(key,self.header[key])
+        # get host list
+        try:
+            result = urllib2.urlopen(request)
+        except URLError as e:
+            if hasattr(e, 'reason'):
+                print 'We failed to reach a server.'
+                print 'Reason: ', e.reason
+            elif hasattr(e, 'code'):
+                print 'The server could not fulfill the request.'
+                print 'Error code: ', e.code
+        else:
+            response = json.loads(result.read())
+            result.close()
+            print "\033[1;32;40m%s\033[0m" % "Number Of Templates: ","\033[1;31;40m%d\033[0m" % len(response['result'])
+            for template in response['result']:
+                print "\t","Template_id:",template['templateid'],"\t","Template_Name:",template['name'].encode('GBK')
+
     def host_create(self,hostip,groupid,templateid):
         authID = self.user_login()
         data = json.dumps(
@@ -129,7 +197,7 @@ class zabbixtools:
         data = json.dumps(
                 {
                     "jsonrpc": "2.0",
-                    "method": "host.get",
+                    "method": "host.delete",
                     "params":[ 
                         {"hostid": hostid}
                         ],
@@ -154,40 +222,6 @@ class zabbixtools:
             response = json.loads(result.read())
             result.close()
             print  "the host have been deleted !!!" 
-
-    def hostgroup_get(self):
-        authID = self.user_login()
-        data = json.dumps(
-                {
-                    "jsonrpc": "2.0",
-                    "method": "hostgroup.get",
-                    "params": {
-                        "output": "extend",
-                        #"filter":{"host":""}
-                        },
-                    "auth": authID,
-                    "id": 1,
-                    })
-                # create request object
-        request = urllib2.Request(self.url,data)
-        for key in self.header:
-            request.add_header(key,self.header[key])
-        # get host list
-        try:
-            result = urllib2.urlopen(request)
-        except URLError as e:
-            if hasattr(e, 'reason'):
-                print 'We failed to reach a server.'
-                print 'Reason: ', e.reason
-            elif hasattr(e, 'code'):
-                print 'The server could not fulfill the request.'
-                print 'Error code: ', e.code
-        else:
-            response = json.loads(result.read())
-            result.close()
-            print "\033[1;32;40m%s\033[0m" % "Number Of Hostgroups: ","\033[1;31;40m%d\033[0m" % len(response['result'])
-            for hostgroup in response['result']:
-                print "\t","HostGroup_id:",hostgroup['groupid'],"\t","HostGroup_Name:",hostgroup['name'].encode('GBK')
 
     def hostgroup_create(self,hostgroup):
         authID = self.user_login()
@@ -252,40 +286,6 @@ class zabbixtools:
             response = json.loads(result.read())
             result.close()
             print "the %s hostgroup have been deleted !!!" % hostgroupid
-
-    def template_get(self):
-        authID = self.user_login()
-        data = json.dumps(
-                {
-                    "jsonrpc": "2.0",
-                    "method": "template.get",
-                    "params": {
-                        "output": "extend",
-                        #"filter":{"host":""}
-                        },
-                    "auth": authID,
-                    "id": 1,
-                    })
-                # create request object
-        request = urllib2.Request(self.url,data)
-        for key in self.header:
-            request.add_header(key,self.header[key])
-        # get host list
-        try:
-            result = urllib2.urlopen(request)
-        except URLError as e:
-            if hasattr(e, 'reason'):
-                print 'We failed to reach a server.'
-                print 'Reason: ', e.reason
-            elif hasattr(e, 'code'):
-                print 'The server could not fulfill the request.'
-                print 'Error code: ', e.code
-        else:
-            response = json.loads(result.read())
-            result.close()
-            print "\033[1;32;40m%s\033[0m" % "Number Of Templates: ","\033[1;31;40m%d\033[0m" % len(response['result'])
-            for template in response['result']:
-                print "\t","Template_id:",template['templateid'],"\t","Template_Name:",template['name'].encode('GBK')
 
     def template_delete(self,templateid):
         authID = self.user_login()
